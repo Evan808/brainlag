@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Brain Lag link preview</title>
+  <!-- Source for og.png (1200×630). Render: see tools/README in CLAUDE.md. Not deployed. -->
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    html, body { width: 1200px; height: 630px; overflow: hidden; }
+    body { display: grid; place-items: center; background: var(--desk); }
+    .og-window { width: 1104px; height: 534px; max-width: none; box-shadow: 8px 8px 0 var(--outline); border-width: 3px; }
+    .og-window .titlebar { padding: 12px 16px 12px 24px; border-bottom-width: 3px; }
+    .og-window .titlebar-name { font-size: 24px; }
+    .og-window .tb-btn { width: 40px; height: 40px; font-size: 22px; }
+    .og-body { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 32px; }
+    .og-copy { display: flex; flex-direction: column; justify-content: center; gap: 20px; }
+    .og-title { margin: 0; font-family: var(--dot); font-size: 76px; line-height: 1; letter-spacing: .02em; }
+    .og-tag { margin: 0; font-weight: 800; font-size: 32px; line-height: 1.25; }
+    .og-sub { margin: 0; font-size: 22px; line-height: 1.4; color: var(--cover-ink); }
+    .og-screen { justify-content: center; padding: 16px; gap: 10px; }
+    .og-screen .screen-status { font-size: 18px; }
+    .og-screen .timer { font-size: 20px; }
+    .og-screen .stack { flex: none; gap: 10px; }
+    .og-screen .row { min-height: 72px; }
+    .og-screen .row-main { font-size: 40px; }
+    .og-screen .box { width: 54px; height: 54px; }
+    .og-screen .tag { font-size: 16px; min-width: 40px; }
+    .og-screen .row.is-hidden { min-height: 44px; }
+    .og-screen .cover-label { font-size: 16px; }
+  </style>
+</head>
+<body>
+  <div class="window og-window">
+    <header class="titlebar">
+      <span class="titlebar-name">BRAIN_LAG.EXE</span>
+      <div class="titlebar-btns"><span class="tb-btn">?</span></div>
+    </header>
+    <div class="og-body">
+      <div class="og-copy">
+        <p class="og-title">BRAIN LAG</p>
+        <p class="og-tag">Answer the problem from N&nbsp;steps ago.</p>
+        <p class="og-sub">A two-minute working-memory workout.<br>Hold answers you can't see.</p>
+      </div>
+      <div class="screen og-screen">
+        <div class="screen-status"><span>2-back · recall #19</span><span class="timer">01:32</span></div>
+        <div class="stack">
+          <div class="row is-current"><span class="tag">21</span><div class="row-main"><span>9 − 7 =</span><span class="box">?</span></div></div>
+          <div class="row is-hidden"><span class="tag">20</span><div class="row-main"><span>6 + 2 =</span></div><span class="cover-label">remember</span></div>
+          <div class="row is-ok"><span class="tag">19</span><div class="row-main"><span>8 − 4 =</span><span class="box">4</span><span class="verdict">✓</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

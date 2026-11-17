@@ -8,6 +8,8 @@ A tiny n-back math game: a new problem appears at the top, you answer the one fr
 - Hosted on Vercel as static files. Every milestone ends deployed.
 - Local preview: `node tools/serve.mjs` → http://localhost:5173 (also in `.claude/launch.json`). `styleboard.html` is local-only (excluded from deploys via `.vercelignore`).
 - `?debug` = fixed seed + hidden answers visible. Use it to check game logic.
+- Link preview: `og.png` is rendered from `tools/og.html`. With the local server running:
+  `"/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe" --headless=new --hide-scrollbars --force-device-scale-factor=1 --window-size=1200,630 --virtual-time-budget=3000 --screenshot="C:\codebases\dumbcalculator\og.png" http://localhost:5173/tools/og.html`
 
 ## How to work here
 - **One milestone at a time** (see `PLAN.md`). Small change → look at it → next change. No "make it look like the reference" in one shot.

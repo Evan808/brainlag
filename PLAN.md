@@ -4,7 +4,7 @@ A tiny working-memory math game. A new problem appears at the top; you answer th
 
 Goal: simple, fast to ship, and *not slop* — every pixel has a job, and it feels good to press.
 
-> Status (Nov 17): v1 rebuilt from scratch to this plan. Milestones 1–6 done; milestone 7 is missing the 1200×630 link-preview image and a real-phone test. v1.1 (daily challenge) not started.
+> Status (Nov 17): v1 rebuilt from scratch to this plan. Milestones 1–6 done; milestone 7 has the link-preview image, still needs a real-phone test. v1.1 (daily challenge) not started.
 
 ---
 
