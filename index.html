@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Brain Lag</title>
+  <meta name="description" content="A working-memory math game: always answer the problem from N steps ago.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <!-- Level select -->
+    <section id="menu" class="screen">
+      <div class="title-block">
+        <h1>Brain Lag</h1>
+        <p class="tagline">Answer the problem from <em>N</em> steps ago.</p>
+      </div>
+      <div id="levels" class="levels"></div>
+      <details class="howto">
+        <summary>How to play</summary>
+        <ol>
+          <li>A new problem shows up at the top. <strong>Don't answer it yet</strong> — remember it.</li>
+          <li>Once N more problems have appeared, answer that old one at the bottom. Its numbers are hidden.</li>
+          <li>Problems in between are covered. You're holding N answers in your head at once.</li>
+          <li>Type with the keypad or your keyboard. 20 answers per round.</li>
+        </ol>
+      </details>
+    </section>
+
+    <!-- Game -->
+    <section id="game" class="screen" hidden>
+      <header class="topbar">
+        <span id="level-label" class="level-label"></span>
+        <span class="timer"><span class="timer-label">Time</span><span id="timer">0:00</span></span>
+      </header>
+
+      <div id="stack" class="stack" aria-live="polite"></div>
+
+      <div class="pad">
+        <div class="pad-top">
+          <button id="retry" class="btn small" type="button">Retry</button>
+          <div id="status" class="status"></div>
+          <button id="quit" class="btn small" type="button">Quit</button>
+        </div>
+        <div id="keypad" class="keypad"></div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section id="results" class="screen" hidden>
+      <div class="results-card">
+        <p id="res-level" class="res-level"></p>
+        <p class="res-score"><span id="res-correct"></span><span class="res-of">/ 20</span></p>
+        <p id="res-time" class="res-time"></p>
+        <p id="res-best" class="res-best"></p>
+      </div>
+      <div class="results-actions">
+        <button id="again" class="btn primary" type="button">Play again</button>
+        <button id="to-menu" class="btn" type="button">Levels</button>
+      </div>
+    </section>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
