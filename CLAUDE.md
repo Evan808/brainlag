@@ -6,7 +6,7 @@ A tiny n-back math game: a new problem appears at the top, you answer the one fr
 - Plain HTML + CSS + JS. **No framework, no build step, no npm dependencies, no backend.**
 - Files: `index.html`, `style.css`, `game.js`, `/fonts`, plus `styleboard.html` for components.
 - Hosted on Vercel as static files. Every milestone ends deployed.
-- Local preview: serve the folder with any static server on port 5173 (see `.claude/launch.json`).
+- Local preview: `node tools/serve.mjs` → http://localhost:5173 (also in `.claude/launch.json`). `styleboard.html` is local-only (excluded from deploys via `.vercelignore`).
 - `?debug` = fixed seed + hidden answers visible. Use it to check game logic.
 
 ## How to work here

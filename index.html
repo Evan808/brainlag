@@ -4,62 +4,134 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Brain Lag</title>
-  <meta name="description" content="A working-memory math game: always answer the problem from N steps ago.">
+  <meta name="description" content="A two-minute working-memory workout: always answer the problem from N steps ago.">
+  <meta name="theme-color" content="#34BEED">
+  <meta property="og:title" content="Brain Lag">
+  <meta property="og:description" content="A two-minute working-memory workout: always answer the problem from N steps ago.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='2' width='26' height='26' rx='4' fill='%231A1A1A'/%3E%3Crect x='1' y='1' width='26' height='26' rx='4' fill='%2334BEED' stroke='%231A1A1A' stroke-width='2'/%3E%3Ctext x='14' y='21' font-family='monospace' font-weight='bold' font-size='16' text-anchor='middle' fill='%230B3A4F'%3EN%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="fonts/mplusrounded1c-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/dotgothic16-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main id="app">
-    <!-- Level select -->
-    <section id="menu" class="screen">
-      <div class="title-block">
-        <h1>Brain Lag</h1>
-        <p class="tagline">Answer the problem from <em>N</em> steps ago.</p>
+<div class="desk">
+  <div class="window" id="window">
+
+    <header class="titlebar">
+      <span class="titlebar-name">BRAIN_LAG.EXE</span>
+      <div class="titlebar-btns">
+        <button class="tb-btn" id="btn-sound" type="button" aria-pressed="false" aria-label="Sound" title="Sound">
+          <svg class="sound-off" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2z"/><path d="M11.5 6l3 4M14.5 6l-3 4"/></svg>
+          <svg class="sound-on" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2z"/><path d="M11.5 5.5a3.5 3.5 0 0 1 0 5"/></svg>
+        </button>
+        <button class="tb-btn" id="btn-help" type="button" aria-label="Why this game" title="Why this game">?</button>
+        <button class="tb-btn" id="btn-close" type="button" aria-label="Back to levels" title="Back to levels" hidden>×</button>
       </div>
-      <div id="levels" class="levels"></div>
-      <details class="howto">
-        <summary>How to play</summary>
-        <ol>
-          <li>A new problem shows up at the top. <strong>Don't answer it yet</strong> — remember it.</li>
-          <li>Once N more problems have appeared, answer that old one at the bottom. Its numbers are hidden.</li>
-          <li>Problems in between are covered. You're holding N answers in your head at once.</li>
-          <li>Type with the keypad or your keyboard. 20 answers per round.</li>
-        </ol>
-      </details>
-    </section>
+    </header>
 
-    <!-- Game -->
-    <section id="game" class="screen" hidden>
-      <header class="topbar">
-        <span id="level-label" class="level-label"></span>
-        <span class="timer"><span class="timer-label">Time</span><span id="timer">0:00</span></span>
-      </header>
+    <main class="window-body">
 
-      <div id="stack" class="stack" aria-live="polite"></div>
-
-      <div class="pad">
-        <div class="pad-top">
-          <button id="retry" class="btn small" type="button">Retry</button>
-          <div id="status" class="status"></div>
-          <button id="quit" class="btn small" type="button">Quit</button>
+      <!-- Intro: why play -->
+      <section class="view" id="view-intro" hidden>
+        <div class="screen screen--grow intro-screen">
+          <p class="intro-step" id="intro-step"></p>
+          <h1 class="intro-title" id="intro-title"></h1>
+          <p class="intro-text" id="intro-text"></p>
         </div>
-        <div id="keypad" class="keypad"></div>
-      </div>
-    </section>
+        <div class="dots" id="intro-dots"></div>
+        <div class="btn-row">
+          <button class="btn" id="intro-skip" type="button">Skip</button>
+          <button class="btn btn--primary" id="intro-next" type="button">Next</button>
+        </div>
+      </section>
 
-    <!-- Results -->
-    <section id="results" class="screen" hidden>
-      <div class="results-card">
-        <p id="res-level" class="res-level"></p>
-        <p class="res-score"><span id="res-correct"></span><span class="res-of">/ 20</span></p>
-        <p id="res-time" class="res-time"></p>
-        <p id="res-best" class="res-best"></p>
+      <!-- Level select -->
+      <section class="view" id="view-menu" hidden>
+        <div class="screen">
+          <div class="menu-head">
+            <p class="menu-title">BRAIN LAG</p>
+            <p class="menu-sub">ANSWER THE PROBLEM FROM N STEPS AGO</p>
+          </div>
+          <ul class="tracks" id="tracks"></ul>
+        </div>
+        <div class="menu-foot">
+          <button class="btn" id="menu-why" type="button">Why play</button>
+          <button class="btn btn--silver" id="menu-tutorial" type="button">Tutorial</button>
+        </div>
+      </section>
+
+      <!-- Game -->
+      <section class="view" id="view-game" hidden>
+        <div class="screen screen--grow">
+          <div class="screen-status">
+            <span id="status"></span>
+            <span class="timer" id="timer">00:00</span>
+          </div>
+          <div class="stack" id="stack" aria-live="polite"></div>
+        </div>
+        <div class="coach" id="coach" hidden><span class="coach-arrow" id="coach-arrow">▲</span><span id="coach-text"></span></div>
+        <div class="progress">
+          <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width: 0%"></div></div>
+          <span class="progress-label" id="progress-label">0/20</span>
+        </div>
+        <div class="keypad" id="keypad">
+          <button class="key" data-key="1" type="button">1</button>
+          <button class="key" data-key="2" type="button">2</button>
+          <button class="key" data-key="3" type="button">3</button>
+          <button class="key" data-key="4" type="button">4</button>
+          <button class="key" data-key="5" type="button">5</button>
+          <button class="key" data-key="6" type="button">6</button>
+          <button class="key" data-key="7" type="button">7</button>
+          <button class="key" data-key="8" type="button">8</button>
+          <button class="key" data-key="9" type="button">9</button>
+          <button class="key key--silver key--word" data-key="retry" type="button">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 8a5 5 0 1 0 1.5-3.5"/><path d="M3 2v3h3"/></svg>Retry
+          </button>
+          <button class="key" data-key="0" type="button">0</button>
+          <button class="key key--primary key--word" data-key="action" id="key-action" type="button">Next</button>
+        </div>
+      </section>
+
+      <!-- Results -->
+      <section class="view" id="view-results" hidden>
+        <div class="screen result-screen">
+          <p class="result-level" id="res-level"></p>
+          <p class="result-score"><span id="res-correct"></span><small id="res-total"></small></p>
+          <p class="result-time" id="res-time"></p>
+          <div class="result-strip" id="res-strip" aria-hidden="true"></div>
+          <span class="badge" id="res-badge" hidden>new best</span>
+          <p class="result-line" id="res-line"></p>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn--primary" id="res-again" type="button">Again</button>
+          <button class="btn" id="res-levels" type="button">Levels</button>
+        </div>
+      </section>
+
+    <!-- Pause + quit confirm cover the window body, title bar stays visible -->
+    <div class="overlay" id="overlay-pause" hidden>
+      <div class="overlay-card">
+        <p class="overlay-title">Paused</p>
+        <p class="overlay-text">The stack is covered while you're away. The timer is stopped.</p>
+        <button class="btn btn--primary" id="pause-resume" type="button">Resume</button>
       </div>
-      <div class="results-actions">
-        <button id="again" class="btn primary" type="button">Play again</button>
-        <button id="to-menu" class="btn" type="button">Levels</button>
+    </div>
+    <div class="overlay" id="overlay-quit" hidden>
+      <div class="overlay-card">
+        <p class="overlay-title">Quit round?</p>
+        <p class="overlay-text">This round won't be saved.</p>
+        <div class="btn-row">
+          <button class="btn btn--primary" id="quit-stay" type="button">Keep going</button>
+          <button class="btn" id="quit-leave" type="button">Quit</button>
+        </div>
       </div>
-    </section>
-  </main>
-  <script src="game.js"></script>
+    </div>
+
+    </main>
+
+  </div>
+</div>
+<script src="game.js"></script>
 </body>
 </html>
