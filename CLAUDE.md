@@ -78,6 +78,12 @@ Purple-blue gradients · glassmorphism · drop shadows with blur · emoji as ico
 - 250ms grace window to change an answer before it locks.
 - Best score per level in `localStorage`, every read/write wrapped in try/catch.
 
+## Layout by screen size
+- **Phone (< 600px):** vertical, one column, window fills the screen.
+- **Tablet (600–899px):** same vertical layout, window up to 680px wide.
+- **Wide (≥ 900px wide and ≥ 540px tall):** landscape window up to 1120×760. Game = screen left, progress + keypad right (keypad stretches to fill). Menu = 2×2 level grid. Intro/results = full-width screen, buttons bottom-right.
+- The window should always use most of the viewport; no big empty desk.
+
 ## Phone rules
 - Never use `<input>` for answers (no OS keyboard). Keypad only.
 - Use `100dvh`, respect safe areas, `touch-action: manipulation` on buttons.
